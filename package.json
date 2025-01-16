@@ -52,5 +52,8 @@
   "packageManager": "yarn@3.2.3",
   "engines": {
     "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "framer-motion": "^11.18.0"
   }
 }
