@@ -15,7 +15,7 @@ import {
 import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { abi } from '../../../contract-abi';
+import { abi } from '../contract-abi';
 import FlipCard, { BackCard, FrontCard } from '../components/FlipCard';
 
 const contractConfig = {
