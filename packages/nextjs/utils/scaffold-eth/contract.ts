@@ -76,14 +76,14 @@ export type GenericContractsDeclaration = {
 
 export const contracts = contractsData as GenericContractsDeclaration | null;
 
-type ConfiguredChainId = (typeof scaffoldConfig)["targetNetworks"][0]["id"];
+type ConfiguredChainId  = (typeof scaffoldConfig)["targetNetworks"][0]["id"];
 
 type IsContractDeclarationMissing<TYes, TNo> = typeof contractsData extends { [key in ConfiguredChainId]: any }
   ? TNo
   : TYes;
 
 type ContractsDeclaration = IsContractDeclarationMissing<GenericContractsDeclaration, typeof contractsData>;
-
+// @ts-ignore
 type Contracts = ContractsDeclaration[ConfiguredChainId];
 
 export type ContractName = keyof Contracts;

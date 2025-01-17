@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   20143: {
     PurpleCat: {
-      address: "0xc20758dd845e70c76641177d57df119379433d5f",
+      address: "0x9b8a9202e6b5423e220c1e4cd6194d6372693bca",
       abi: [
         {
           type: "constructor",
@@ -741,7 +741,7 @@ const deployedContracts = {
         },
       ],
       inheritedFunctions: {},
-      deploymentFile: "run-1737027435.json",
+      deploymentFile: "run-1737094562.json",
       deploymentScript: "Deploy.s.sol",
     },
   },

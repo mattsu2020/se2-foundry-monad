@@ -16,10 +16,9 @@ import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { abi } from '../contract-abi';
-import FlipCard, { BackCard, FrontCard } from '../components/FlipCard';
 
 const contractConfig = {
-  address: '0xc20758dd845e70C76641177d57df119379433d5F',
+  address: '0x9b8a9202e6B5423e220C1e4CD6194d6372693bCA',
   abi,
 } as const;
 
@@ -31,7 +30,7 @@ const Home: NextPage = () => {
   const [max_supply, setMaxSupply] = React.useState(0n);
   const [mintlist, setMintlist] = React.useState(false);
   const { isConnected } = useAccount();
-
+  const chain_id = 20143;
   const {
     data: hash,
     writeContract: mint,
@@ -43,17 +42,21 @@ const Home: NextPage = () => {
   const { data: totalSupplyData } = useReadContract({
     ...contractConfig,
     functionName: 'totalSupply',
+    chainId: chain_id,
   });
 
-  const { data: mintlistData } = useReadContract({
-    ...contractConfig,
-    functionName: 'mintlist',
-    args: [connectedAddress],
-  });
+  const { data: mintlistData } = useReadContract(
+    {
+      ...contractConfig,
+      functionName: 'mintlist',
+      args: [connectedAddress ?? ""],
+      chainId: chain_id,
+    });
 
   const { data: maxSupplyData } = useReadContract({
     ...contractConfig,
     functionName: 'MAX_SUPPLY',
+    chainId: chain_id,
   });
 
   const {
@@ -74,7 +77,7 @@ const Home: NextPage = () => {
   }, [totalSupplyData]);
 
   React.useEffect(() => {
-    if (mintlistData) {
+    if (mintlistData && connectedAddress != undefined) {
       setMintlist(mintlistData);
     }
   }, [mintlistData]);
@@ -106,6 +109,11 @@ const Home: NextPage = () => {
           <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row">
             <p style={{ margin: '12px 0 24px' }}>
               minted NFT {Number(totalMinted)} / {Number(max_supply)}
+            </p>
+          </div>
+          <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row">
+            <p style={{ margin: '12px 0 24px' }}>
+              NFT price is 0.001 DMON
             </p>
           </div>
           <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row">
@@ -143,6 +151,7 @@ const Home: NextPage = () => {
                       BigInt(1)
                     ],
                     value: parseEther('0.001'),
+                    chainId: chain_id,
                   })
                 }
               >

@@ -72,15 +72,17 @@ export const useTransactor = (_walletClient?: WalletClient): TransactionFunc => 
       notificationId = notification.loading(
         <TxnNotification message="Waiting for transaction to complete." blockExplorerLink={blockExplorerTxURL} />,
       );
-
-      transactionReceipt = await publicClient.waitForTransactionReceipt({
-        hash: transactionHash,
-        confirmations: options?.blockConfirmations,
-      });
+      if (publicClient) {
+        transactionReceipt = await publicClient.waitForTransactionReceipt({
+          hash: transactionHash,
+          confirmations: options?.blockConfirmations,
+        });
+      }
       notification.remove(notificationId);
 
-      if (transactionReceipt.status === "reverted") throw new Error("Transaction reverted");
-
+      if (transactionReceipt) {
+        if (transactionReceipt.status === "reverted") throw new Error("Transaction reverted");
+      }
       notification.success(
         <TxnNotification message="Transaction completed successfully!" blockExplorerLink={blockExplorerTxURL} />,
         {
@@ -88,7 +90,7 @@ export const useTransactor = (_walletClient?: WalletClient): TransactionFunc => 
         },
       );
 
-      if (options?.onBlockConfirmation) options.onBlockConfirmation(transactionReceipt);
+      if (options?.onBlockConfirmation && transactionReceipt) options.onBlockConfirmation(transactionReceipt);
     } catch (error: any) {
       if (notificationId) {
         notification.remove(notificationId);
