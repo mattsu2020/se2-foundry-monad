@@ -16,6 +16,7 @@ import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Address } from "~~/components/scaffold-eth";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { abi } from '../contract-abi';
+import { Button } from "@/components/ui/button"
 
 const contractConfig = {
   address: '0x9b8a9202e6B5423e220C1e4CD6194d6372693bCA',
@@ -136,10 +137,11 @@ const Home: NextPage = () => {
                   width={300}
                 />
               </div>
-              <button
-                style={{ marginTop: 24, color: 'white', backgroundColor: 'black' }}
+              {!mintlist? (
+                <button
+                style={{ marginTop: 24, color: 'white'}}
                 disabled={!mint || isMintLoading || isMintStarted}
-                className="button cursor-pointer"
+                className="button cursor-pointer bg-indigo-600 px-4 py-3 text-center text-sm font-semibold inline-block text-white  uppercase"
                 data-mint-loading={isMintLoading}
                 data-mint-started={isMintStarted}
                 onClick={() =>
@@ -159,7 +161,17 @@ const Home: NextPage = () => {
                 {isMintStarted && 'Minting...'}
                 {!isMintLoading && !isMintStarted && !mintlist && 'Mint'}
               </button>
-              {mintlist && 'minted'}
+              ) : (
+                ""
+              )}
+              {mintlist ? (
+                <div className="bg-indigo-600 px-4 py-3 text-center text-sm font-semibold inline-block text-white  uppercase">
+                  minted
+                </div>
+              ) : (
+                "" 
+              )
+              }
             </div>
           )}
         </div>

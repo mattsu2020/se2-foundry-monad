@@ -21,7 +21,10 @@
     "@uniswap/v2-sdk": "~4.6.1",
     "blo": "~1.2.0",
     "burner-connector": "0.0.9",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "daisyui": "4.12.10",
+    "lucide-react": "^0.473.0",
     "next": "~14.2.11",
     "next-nprogress-bar": "~2.3.13",
     "next-themes": "~0.3.0",
@@ -30,9 +33,11 @@
     "react-copy-to-clipboard": "~5.1.0",
     "react-dom": "~18.3.1",
     "react-hot-toast": "~2.4.0",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "~3.1.0",
     "viem": "2.21.54",
-    "wagmi": "2.13.4",
+    "wagmi": "2.14.8",
     "zustand": "~5.0.0"
   },
   "devDependencies": {
